@@ -17,6 +17,7 @@ class ChecklistViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "Name of the list"
         tableView.delegate = self
         tableView.dataSource = self
         loadChecklistItems()
