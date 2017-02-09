@@ -14,10 +14,11 @@ class ChecklistViewController: UITableViewController {
     
     var editItem: ChecklistItem?
     
+    var list: Checklist!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Name of the list"
+        self.title = list.name
         tableView.delegate = self
         tableView.dataSource = self
         loadChecklistItems()
