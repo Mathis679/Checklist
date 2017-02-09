@@ -19,7 +19,7 @@ class ChecklistViewController: UITableViewController {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-        createPlist()
+        loadChecklistItems()
         // Do any additional setup after loading the view, typically from a nib.
     }
 
@@ -59,6 +59,7 @@ class ChecklistViewController: UITableViewController {
         
         table.remove(at: indexPath.row)
         tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
+        saveChecklistItems()
         
         
     }
@@ -76,6 +77,7 @@ class ChecklistViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
         table[indexPath.row].toggleChecked()
         tableView.reloadRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
+        saveChecklistItems()
     }
 
     func configureCheckmarkFor(cell: UITableViewCell, withItem item: ChecklistItem){
@@ -106,31 +108,16 @@ class ChecklistViewController: UITableViewController {
         return path
     }
     
-    func createPlist(){
-        let fileManager = FileManager.default
     
-        let path = dataFileUrl().absoluteString
+    
+    func saveChecklistItems(){
         
-        if(!fileManager.fileExists(atPath: path)){
-            print(path)
+        NSKeyedArchiver.archiveRootObject(_: table, toFile: dataFileUrl().absoluteString)
             
-            let data : [String: String] = [
-                "Company": "My Company",
-                "FullName": "My Full Name",
-                "FirstName": "My First Name",
-                "LastName": "My Last Name",
-                // any other key values
-            ]
-            
-            let someData = NSDictionary(dictionary: data)
-            let isWritten = someData.write(toFile: path, atomically: true)
-            print("is the file created: \(isWritten)")
-            
-            
-            
-        }else{
-            print("file exists")
-        }
+    }
+    
+    func loadChecklistItems(){
+        table = NSKeyedUnarchiver.unarchiveObject(withFile: dataFileUrl().absoluteString) as! [ChecklistItem]
     }
 
 }
@@ -146,12 +133,14 @@ extension ChecklistViewController: AddItemViewControllerDelegate {
         table.append(item)
         let indexPath = IndexPath(row: table.count - 1, section: 0)
         tableView.insertRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
+        saveChecklistItems()
     }
     
     func editItemViewController(controller: AddItemViewController, item: ChecklistItem, index: Int) {
         dismiss(animated: true, completion: nil)
         table[index] = item
         tableView.reloadData()
+        saveChecklistItems()
     }
 }
 
