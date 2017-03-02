@@ -10,16 +10,14 @@ import UIKit
 
 class AllListViewController: UITableViewController {
 
-    var table = [Checklist(name: "testall1", items: [ChecklistItem(text: "test1"),ChecklistItem(text: "test2"),ChecklistItem(text: "test3")] ), Checklist(name: "testall2", items: [ChecklistItem(text: "teeee")]), Checklist(name: "testall3", items: [ChecklistItem(text: "teeee33"),ChecklistItem(text: "test2")])]
     
-    var editList: Checklist?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Checklists"
         tableView.delegate = self
         tableView.dataSource = self
-        //loadChecklistItems()
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -27,7 +25,7 @@ class AllListViewController: UITableViewController {
             let targetController = segue.destination as! ChecklistViewController
             let cell = sender as? UITableViewCell
             let indexPath = self.tableView.indexPath(for: cell!)
-            targetController.list = table[(indexPath?.row)!]
+            targetController.list = DataModel.sharedInstance.table[(indexPath?.row)!]
         }else if (segue.identifier == "AddList" ){
             let destinationNavigationController = segue.destination as? UINavigationController
             let targetController = destinationNavigationController?.topViewController as! ListDetailViewController
@@ -41,8 +39,7 @@ class AllListViewController: UITableViewController {
             targetController.delegate = self
             targetController.from = "Edit"
             targetController.editIndex = indexPath?.row
-            editList = table[(indexPath?.row)!]
-            targetController.editList = self.editList
+            targetController.editList = DataModel.sharedInstance.table[(indexPath?.row)!]
         }
 
             
@@ -50,12 +47,12 @@ class AllListViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return table.count
+        return DataModel.sharedInstance.table.count
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         
-        table.remove(at: indexPath.row)
+        DataModel.sharedInstance.table.remove(at: indexPath.row)
         tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
          //saveChecklistItems()
         
@@ -65,7 +62,7 @@ class AllListViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         let cell = tableView.dequeueReusableCell(withIdentifier: "AllListItem", for: indexPath)
-        configureNameFor(cell: cell, withItem: table[indexPath.row])
+        configureNameFor(cell: cell, withItem: DataModel.sharedInstance.table[indexPath.row])
         return cell
     }
     
@@ -95,15 +92,15 @@ extension AllListViewController: ListDetailViewControllerDelegate {
     
     func addListViewController(controller: ListDetailViewController, didFinishAddingItem item: Checklist){
         dismiss(animated: true, completion: nil)
-        table.append(item)
-        let indexPath = IndexPath(row: table.count - 1, section: 0)
+        DataModel.sharedInstance.table.append(item)
+        let indexPath = IndexPath(row: DataModel.sharedInstance.table.count - 1, section: 0)
         tableView.insertRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
         //saveChecklistItems()
     }
     
     func editListViewController(controller: ListDetailViewController, item: Checklist, index: Int) {
         dismiss(animated: true, completion: nil)
-        table[index] = item
+        DataModel.sharedInstance.table[index] = item
         tableView.reloadData()
         //saveChecklistItems()
     }

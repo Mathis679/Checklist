@@ -35,12 +35,12 @@ class ChecklistItem: NSObject, NSCoding {
     // MARK: NSCoding
     
     required convenience init(coder decoder: NSCoder) {
-        let checked = decoder.decodeBool(forKey: "checked") as? Bool
+        let checked = decoder.decodeBool(forKey: "checked")
         let text = decoder.decodeObject(forKey: "text") as? String
         
         self.init(
             text: text!,
-            checked: checked!
+            checked: checked
         )
     }
     

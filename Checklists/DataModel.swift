@@ -12,8 +12,20 @@ class DataModel{
     
     static let sharedInstance = DataModel()
     
+    var table: [Checklist] = []
+    
     private init() {
     
+        loadChecklists()
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(DataModel.saveChecklists),
+            name: .UIApplicationDidEnterBackground,
+            object: nil)
+        
+       
+        
     }
     
     func documentDirectory() -> URL{
@@ -31,14 +43,18 @@ class DataModel{
     
     
     
-    func saveChecklists(table: [Checklist]){
+    @objc func saveChecklists(){
         
-        NSKeyedArchiver.archiveRootObject(_: table, toFile: dataFileUrl().absoluteString)
+        NSKeyedArchiver.archiveRootObject(table, toFile: dataFileUrl().absoluteString)
         
     }
     
-    func loadChecklists() -> [Checklist]{
+    func loadChecklists(){
+        if(NSKeyedUnarchiver.unarchiveObject(withFile: dataFileUrl().absoluteString) != nil){
+            table = NSKeyedUnarchiver.unarchiveObject(withFile: dataFileUrl().absoluteString) as! [Checklist]
+        }else{
+            table = []
+        }
         
-        return NSKeyedUnarchiver.unarchiveObject(withFile: dataFileUrl().absoluteString) as! [Checklist]
     }
 }
