@@ -14,6 +14,7 @@ class ListDetailViewController: UITableViewController {
     @IBOutlet weak var doneBarButton: UIBarButtonItem!
     @IBOutlet weak var textField: UITextField!
     
+    
     var delegate: ListDetailViewControllerDelegate?
     
     var from: String?

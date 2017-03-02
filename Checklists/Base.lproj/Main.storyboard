@@ -20,7 +20,7 @@
                                 <rect key="frame" x="0.0" y="92" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bKB-mP-HDJ" id="XvB-3R-1Yl">
-                                    <frame key="frameInset" width="308" height="44"/>
+                                    <frame key="frameInset" width="308" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="✔️" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q0O-7G-diE">
@@ -79,7 +79,7 @@
                                         <rect key="frame" x="0.0" y="99" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fqR-qG-GPD" id="dg1-Ec-ZN6">
-                                            <frame key="frameInset" width="375" height="44"/>
+                                            <frame key="frameInset" width="375" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name of the item" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Fsd-Hg-KyD">
@@ -212,7 +212,8 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                     <connections>
-                                                        <action selector="textFieldChanged:" destination="IcA-fX-VRy" eventType="editingDidEnd" id="4ZW-rC-zrn"/>
+                                                        <action selector="done" destination="IcA-fX-VRy" eventType="editingDidEndOnExit" id="fAD-ge-nr0"/>
+                                                        <action selector="textFieldChanged:" destination="IcA-fX-VRy" eventType="editingChanged" id="NrZ-v1-EvC"/>
                                                     </connections>
                                                 </textField>
                                             </subviews>
@@ -239,8 +240,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="doneBarButton" destination="pHd-GJ-xoE" id="dOg-y3-y8x"/>
-                        <outlet property="textField" destination="Lne-ns-uPB" id="HgK-ly-e8H"/>
+                        <outlet property="doneBarButton" destination="pHd-GJ-xoE" id="Ykt-Mw-rwY"/>
+                        <outlet property="textField" destination="Lne-ns-uPB" id="CQ1-JU-Qys"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hHT-c6-LWW" userLabel="First Responder" sceneMemberID="firstResponder"/>
