@@ -54,7 +54,6 @@ class AllListViewController: UITableViewController {
         
         DataModel.sharedInstance.table.remove(at: indexPath.row)
         tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
-         //saveChecklistItems()
         
         
     }
@@ -74,6 +73,7 @@ class AllListViewController: UITableViewController {
     func configureNameFor(cell: UITableViewCell, withItem item: Checklist){
         
         cell.textLabel?.text = item.name
+        cell.detailTextLabel?.text = "test"
         
     }
     
@@ -95,14 +95,12 @@ extension AllListViewController: ListDetailViewControllerDelegate {
         DataModel.sharedInstance.table.append(item)
         let indexPath = IndexPath(row: DataModel.sharedInstance.table.count - 1, section: 0)
         tableView.insertRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
-        //saveChecklistItems()
     }
     
     func editListViewController(controller: ListDetailViewController, item: Checklist, index: Int) {
         dismiss(animated: true, completion: nil)
         DataModel.sharedInstance.table[index] = item
         tableView.reloadData()
-        //saveChecklistItems()
     }
 }
 
