@@ -10,7 +10,7 @@ import UIKit
 
 class AllListViewController: UITableViewController {
 
-    var table = [Checklist(name: "testall1"), Checklist(name: "testall2"), Checklist(name: "testall3")]
+    var table = [Checklist(name: "testall1", items: [ChecklistItem(text: "test1"),ChecklistItem(text: "test2"),ChecklistItem(text: "test3")] ), Checklist(name: "testall2", items: [ChecklistItem(text: "teeee")]), Checklist(name: "testall3", items: [ChecklistItem(text: "teeee33"),ChecklistItem(text: "test2")])]
     
     var editList: Checklist?
     

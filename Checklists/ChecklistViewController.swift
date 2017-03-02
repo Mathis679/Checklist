@@ -21,7 +21,8 @@ class ChecklistViewController: UITableViewController {
         self.title = list.name
         tableView.delegate = self
         tableView.dataSource = self
-        loadChecklistItems()
+        table = list.items
+//        loadChecklistItems()
         // Do any additional setup after loading the view, typically from a nib.
     }
 
@@ -61,7 +62,7 @@ class ChecklistViewController: UITableViewController {
         
         table.remove(at: indexPath.row)
         tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
-        saveChecklistItems()
+//        saveChecklistItems()
         
         
     }
@@ -79,7 +80,7 @@ class ChecklistViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
         table[indexPath.row].toggleChecked()
         tableView.reloadRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
-        saveChecklistItems()
+//        saveChecklistItems()
     }
 
     func configureCheckmarkFor(cell: UITableViewCell, withItem item: ChecklistItem){
@@ -97,30 +98,30 @@ class ChecklistViewController: UITableViewController {
         label.text = item.text
     }
     
-    func documentDirectory() -> URL{
-        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first! as String
-        let urlPath = URL(string: path)
-        return urlPath!
-        
-    }
-    
-    func dataFileUrl() -> URL{
-        let documentDirectory = self.documentDirectory()
-        let path = documentDirectory.appendingPathComponent("/checklists.plist")
-        return path
-    }
-    
-    
-    
-    func saveChecklistItems(){
-        
-        NSKeyedArchiver.archiveRootObject(_: table, toFile: dataFileUrl().absoluteString)
-            
-    }
-    
-    func loadChecklistItems(){
-        table = NSKeyedUnarchiver.unarchiveObject(withFile: dataFileUrl().absoluteString) as! [ChecklistItem]
-    }
+//    func documentDirectory() -> URL{
+//        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first! as String
+//        let urlPath = URL(string: path)
+//        return urlPath!
+//        
+//    }
+//    
+//    func dataFileUrl() -> URL{
+//        let documentDirectory = self.documentDirectory()
+//        let path = documentDirectory.appendingPathComponent("/checklists.plist")
+//        return path
+//    }
+//    
+//    
+//    
+//    func saveChecklistItems(){
+//        
+//        NSKeyedArchiver.archiveRootObject(_: table, toFile: dataFileUrl().absoluteString)
+//            
+//    }
+//    
+//    func loadChecklistItems(){
+//        table = NSKeyedUnarchiver.unarchiveObject(withFile: dataFileUrl().absoluteString) as! [ChecklistItem]
+//    }
 
 }
 
@@ -135,14 +136,14 @@ extension ChecklistViewController: AddItemViewControllerDelegate {
         table.append(item)
         let indexPath = IndexPath(row: table.count - 1, section: 0)
         tableView.insertRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
-        saveChecklistItems()
+//        saveChecklistItems()
     }
     
     func editItemViewController(controller: AddItemViewController, item: ChecklistItem, index: Int) {
         dismiss(animated: true, completion: nil)
         table[index] = item
         tableView.reloadData()
-        saveChecklistItems()
+//        saveChecklistItems()
     }
 }
 
