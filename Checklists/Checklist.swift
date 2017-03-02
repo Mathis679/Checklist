@@ -28,15 +28,18 @@ class Checklist: NSObject, NSCoding{
     
     required convenience init(coder decoder: NSCoder) {
         
-        let name = decoder.decodeObject(forKey: "text") as? String
+        let name = decoder.decodeObject(forKey: "name") as? String
+        let items = decoder.decodeObject(forKey: "items") as? [ChecklistItem]
         
         self.init(
-            name: name!
+            name: name!,
+            items: items!
         )
     }
     
     func encode(with coder: NSCoder) {
         coder.encode(self.name, forKey: "name")
+        coder.encode(self.items, forKey: "items")
         
     }
 

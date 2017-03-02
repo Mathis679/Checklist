@@ -19,6 +19,7 @@ class AllListViewController: UITableViewController {
         self.title = "Checklists"
         tableView.delegate = self
         tableView.dataSource = self
+        //loadChecklistItems()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -56,6 +57,7 @@ class AllListViewController: UITableViewController {
         
         table.remove(at: indexPath.row)
         tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
+         //saveChecklistItems()
         
         
     }
@@ -77,7 +79,12 @@ class AllListViewController: UITableViewController {
         cell.textLabel?.text = item.name
         
     }
+    
+    
+
 }
+
+
 
 //MARK: - ListDetailViewControllerDelegate
 extension AllListViewController: ListDetailViewControllerDelegate {
@@ -91,12 +98,14 @@ extension AllListViewController: ListDetailViewControllerDelegate {
         table.append(item)
         let indexPath = IndexPath(row: table.count - 1, section: 0)
         tableView.insertRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
+        //saveChecklistItems()
     }
     
     func editListViewController(controller: ListDetailViewController, item: Checklist, index: Int) {
         dismiss(animated: true, completion: nil)
         table[index] = item
         tableView.reloadData()
+        //saveChecklistItems()
     }
 }
 
