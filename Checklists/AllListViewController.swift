@@ -11,6 +11,10 @@ import UIKit
 class AllListViewController: UITableViewController {
 
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        tableView.reloadData()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,9 +75,17 @@ class AllListViewController: UITableViewController {
     }
     
     func configureNameFor(cell: UITableViewCell, withItem item: Checklist){
-        
+        var detailText: String
         cell.textLabel?.text = item.name
-        cell.detailTextLabel?.text = "test"
+        if(item.items.count == 0){
+            detailText = "(No item)"
+        }else if(item.countChecked() == item.items.count){
+            detailText = "All done!!"
+        }else{
+            detailText = "\(item.countChecked())"+"/"+"\(item.items.count)"
+
+        }
+        cell.detailTextLabel?.text = detailText
         
     }
     

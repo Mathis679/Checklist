@@ -42,6 +42,16 @@ class Checklist: NSObject, NSCoding{
         coder.encode(self.items, forKey: "items")
         
     }
+    
+    func countChecked()->Int{
+        var count = 0
+        for item in items {
+            if(item.checked){
+                count = count + 1
+            }
+        }
+        return count
+    }
 
     
 }
