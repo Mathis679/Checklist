@@ -18,6 +18,7 @@ class DataModel{
     
         loadChecklists()
         
+        
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(DataModel.saveChecklists),
@@ -57,4 +58,22 @@ class DataModel{
         }
         
     }
+    
+    func sortChecklists(){
+        
+        table.sort{sortFunc(checklist1: $0, checklist2: $1)}
+        
+    }
+    
+    func sortFunc(checklist1: Checklist,checklist2: Checklist)->Bool{
+        if(checklist1.name.localizedStandardCompare(checklist2.name).rawValue == -1){ //checklist1 > checklist2
+            return true
+        }else if(checklist1.name.localizedStandardCompare(checklist2.name).rawValue == 0){ //checklist1 == checklist2
+            return false
+        }else if(checklist1.name.localizedStandardCompare(checklist2.name).rawValue == 0){ //checklist1 < checklist2
+            return false
+        }
+        return false
+    }
+    
 }

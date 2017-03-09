@@ -21,6 +21,7 @@ class AllListViewController: UITableViewController {
         self.title = "Checklists"
         tableView.delegate = self
         tableView.dataSource = self
+        DataModel.sharedInstance.sortChecklists()
         
     }
     
@@ -105,13 +106,16 @@ extension AllListViewController: ListDetailViewControllerDelegate {
     func addListViewController(controller: ListDetailViewController, didFinishAddingItem item: Checklist){
         dismiss(animated: true, completion: nil)
         DataModel.sharedInstance.table.append(item)
+        DataModel.sharedInstance.sortChecklists()
         let indexPath = IndexPath(row: DataModel.sharedInstance.table.count - 1, section: 0)
         tableView.insertRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
+        tableView.reloadData()
     }
     
     func editListViewController(controller: ListDetailViewController, item: Checklist, index: Int) {
         dismiss(animated: true, completion: nil)
         DataModel.sharedInstance.table[index] = item
+        DataModel.sharedInstance.sortChecklists()
         tableView.reloadData()
     }
 }
