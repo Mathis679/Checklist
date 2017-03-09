@@ -14,14 +14,24 @@ class Checklist: NSObject, NSCoding{
     
     var items: [ChecklistItem]
     
+    var iconName: String
+    
     override init(){
         self.name = ""
         self.items = []
+        self.iconName = ""
     }
     
     init(name: String, items: [ChecklistItem] = []){
         self.name = name
         self.items = items
+        self.iconName = "No Icon"
+    }
+    
+    init(name: String, items: [ChecklistItem] = [], iconName: String){
+        self.name = name
+        self.items = items
+        self.iconName = iconName
     }
     
     // MARK: NSCoding
@@ -30,16 +40,19 @@ class Checklist: NSObject, NSCoding{
         
         let name = decoder.decodeObject(forKey: "name") as? String
         let items = decoder.decodeObject(forKey: "items") as? [ChecklistItem]
+        let iconName = decoder.decodeObject(forKey: "iconName") as? String
         
         self.init(
             name: name!,
-            items: items!
+            items: items!,
+            iconName: iconName!
         )
     }
     
     func encode(with coder: NSCoder) {
         coder.encode(self.name, forKey: "name")
         coder.encode(self.items, forKey: "items")
+        coder.encode(self.iconName, forKey: "iconName")
         
     }
     

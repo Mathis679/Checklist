@@ -13,6 +13,8 @@ class ListDetailViewController: UITableViewController {
     
     @IBOutlet weak var doneBarButton: UIBarButtonItem!
     @IBOutlet weak var textField: UITextField!
+    @IBOutlet weak var imageView: UIImageView!
+    
     
     
     var delegate: ListDetailViewControllerDelegate?
@@ -22,6 +24,7 @@ class ListDetailViewController: UITableViewController {
     var editIndex: Int?
     
     var editList: Checklist?
+
     
     @IBAction func cancel() {
         

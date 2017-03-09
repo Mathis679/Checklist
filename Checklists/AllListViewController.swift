@@ -67,6 +67,7 @@ class AllListViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         let cell = tableView.dequeueReusableCell(withIdentifier: "AllListItem", for: indexPath)
         configureNameFor(cell: cell, withItem: DataModel.sharedInstance.table[indexPath.row])
+        configureIconFor(cell: cell, withItem: DataModel.sharedInstance.table[indexPath.row])
         return cell
     }
     
@@ -88,6 +89,12 @@ class AllListViewController: UITableViewController {
         }
         cell.detailTextLabel?.text = detailText
         
+    }
+    
+    func configureIconFor(cell: UITableViewCell, withItem item: Checklist){
+        var image: UIImage
+        image = UIImage(named: item.iconName)!
+        cell.imageView?.image = image
     }
     
     
