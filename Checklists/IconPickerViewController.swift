@@ -42,8 +42,7 @@ class IconPickerViewController: UITableViewController {
         if(segue.identifier == "IconChosen"){
             
             let targetController = segue.destination as! ListDetailViewController
-            
-            targetController.imageChosenName = self.imageName
+            targetController.iconName = imageName
         }
     
     }
@@ -57,6 +56,7 @@ class IconPickerViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         let cell = tableView.dequeueReusableCell(withIdentifier: "Icons", for: indexPath)
         cell.textLabel?.text = IconPickerViewController.icons[indexPath.row]
+        cell.imageView?.image = UIImage(named: IconPickerViewController.icons[indexPath.row])
         return cell
     }
     

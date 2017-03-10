@@ -92,9 +92,8 @@ class AllListViewController: UITableViewController {
     }
     
     func configureIconFor(cell: UITableViewCell, withItem item: Checklist){
-        var image: UIImage
-        image = UIImage(named: item.iconName)!
-        cell.imageView?.image = image
+        print(item.iconName)
+        cell.imageView?.image = UIImage(named: item.iconName)
     }
     
     

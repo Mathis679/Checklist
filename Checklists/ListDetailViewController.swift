@@ -25,7 +25,7 @@ class ListDetailViewController: UITableViewController {
     
     var editList: Checklist?
     
-    var imageChosenName: String?
+    var iconName: String = "No Icon"
 
     
     @IBAction func cancel() {
@@ -49,21 +49,18 @@ class ListDetailViewController: UITableViewController {
         print(textField.text)
         if(from == "Add"){
             let item = Checklist(name: textField.text!)
+            item.iconName = self.iconName
             delegate?.addListViewController(controller: self, didFinishAddingItem: item)
         }else if(from == "Edit"){
             let item = Checklist(name: textField.text!)
+            item.iconName = self.iconName
             delegate?.editListViewController(controller: self, item: item, index: editIndex!)
         }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         textField.becomeFirstResponder()
-        if(imageChosenName != nil){
-            var image: UIImage
-            image = UIImage(named: imageChosenName!)!
-            imageView.image = image
-        }
-        
+                
         if(from == "Edit"){
             self.title = "Edit list"
             textField.text = editList?.name
